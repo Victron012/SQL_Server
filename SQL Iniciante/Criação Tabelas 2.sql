@@ -1,0 +1,31 @@
+USE dbLojaJailson;
+
+CREATE TABLE tb_Enderecos(
+	idEndereco INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	idCidade INT NOT NULL,
+	nomeRua VARCHAR(50) NOT NULL,
+	cep VARCHAR(9)
+);
+
+CREATE TABLE tb_Cidades(
+	idCidade INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	idEstado INT NOT NULL,
+	nomeCidade VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE tb_Estados(
+	idEstado INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nomeEstado VARCHAR(30) NOT NULL,
+	sigla VARCHAR(2) NOT NULL
+);
+
+
+ALTER TABLE tb_Enderecos
+ADD CONSTRAINT FK_ENDERECOS_CIDADES
+FOREIGN KEY (idCidade)
+REFERENCES tb_Cidades (idCidade);
+
+ALTER TABLE tb_Cidades
+ADD CONSTRAINT FK_CIDADES_ESTADOS
+FOREIGN KEY (idEstado)
+REFERENCES tb_Estados (idEstado);
